@@ -1,21 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, FlatList, } from 'react-native';
 import { useState } from 'react';
 
 export default function App() {
 
   const [eka, setEka] = useState("");
   const [toka, setToka] = useState("");
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState("");
+  const [results, setResults] = useState(["History"]);
 
   const buttonPlus = () => {
     const sum = parseFloat(eka) + parseFloat(toka);
+    const memory = eka + "+" + toka + "=" + sum;
+    setResults([...results, { key: memory }]);
     setResult(sum);
+    setEka("");
+    setToka("");
   };
 
   const buttonMinus = () => {
     const minus = parseFloat(eka) - parseFloat(toka);
     setResult(minus);
+    const mem = eka + "-" + toka + "=" + minus;
+    setResults([...results, { key: mem }]);
+    setEka("");
+    setToka("");
   };
 
   return (
@@ -45,8 +54,16 @@ export default function App() {
           <Button onPress={buttonMinus} title="-" />
         </View>
       </View>
+      <FlatList
+        data={results}
+        renderItem={({ item }) =>
+        (<View style={styles.listItem}>
+          <Text>{item.key}</Text>
+        </View>)}
+        ListHeaderComponent={() => <Text style= {styles.header}>History</Text>}
+      />
+      <StatusBar style="auto" />
     </View>
-
 
   );
 }
@@ -58,6 +75,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+    marginTop: 100,
   },
   nums: {
     borderWidth: 1,
@@ -70,5 +88,14 @@ const styles = StyleSheet.create({
   onebutton: {
     marginHorizontal: 10,
     width: 35,
+  },
+  listItem: {
+    alignItems: 'center',
+    marginTop: 10,
+
+  },
+  header: {
+    alignItems: 'center',
+    marginTop: 10,
   }
 });
