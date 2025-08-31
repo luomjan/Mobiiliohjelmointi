@@ -20,7 +20,6 @@ export default function App() {
     <View style={styles.container}>
       <TextInput
         style={styles.textBox}
-        placeholder='Enter some text'
         onChangeText={text => setText(text)}
         value={text}
       />
@@ -28,11 +27,17 @@ export default function App() {
         <Button onPress={add} title="Add" />
         <Button onPress={clear} title="Clear" />
       </View>
-      <Text>Shopping List</Text>
-      <FlatList style={styles.list}
+
+      <FlatList
         data={list}
         renderItem={({ item }) => <Text>{item.key}</Text>}
         ListEmptyComponent={<Text>List empty</Text>}
+        ListHeaderComponent={() => (
+          <Text style={styles.header}>
+            Shopping List
+          </Text>
+        )}
+        contentContainerStyle={styles.list}
       />
       <StatusBar style="auto" />
     </View>
@@ -48,13 +53,23 @@ const styles = StyleSheet.create({
   },
   textBox: {
     marginTop: 100,
+    borderWidth: 1,
+    width: '50%'
   },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '50%',
+    marginTop: 20,
   },
   list: {
-
+    alignItems: 'center',
+  },
+  header: {
+    color: "blue",
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: 20,
   },
 });
