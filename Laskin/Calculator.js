@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, FlatList, } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, } from 'react-native';
 import { useState } from 'react';
 
-export default function Calculator({navigation}) {
+export default function Calculator({ navigation }) {
 
     const [eka, setEka] = useState("");
     const [toka, setToka] = useState("");
@@ -53,11 +53,10 @@ export default function Calculator({navigation}) {
                 <View style={styles.onebutton}>
                     <Button onPress={buttonMinus} title="-" />
                 </View>
-                <View style={styles.container}>
-                    <Text>History</Text>
+                <View>
                     <Button
-                        title="Settings"
-                        onPress={() => navigation.navigate('History', {results})}
+                        title="History"
+                        onPress={() => navigation.navigate('History', { results })}
                     />
                 </View>
             </View>
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,
-        marginTop: 100,
+        marginTop: 10,
     },
     nums: {
         borderWidth: 1,
@@ -83,16 +82,13 @@ const styles = StyleSheet.create({
     },
     button: {
         flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
         marginTop: 15,
+        width: '50%',
     },
     onebutton: {
-        marginHorizontal: 10,
         width: 35,
-    },
-    listItem: {
-        alignItems: 'center',
-        marginTop: 10,
-
     },
     header: {
         alignItems: 'center',
