@@ -36,7 +36,7 @@ export default function App() {
         if (!data.symbols) {
           throw new Error("Symbols not found in API response");
         }
-        setCurrencies(Object.keys(data.symbols).sort());
+        setCurrencies(Object.keys(data.symbols));
       }
       catch (err) {
         console.error(err);
@@ -69,7 +69,7 @@ export default function App() {
 
       {result !== "" && (
         <Text style={{ fontSize: 18, marginTop: 20 }}>
-          {result} €
+          {Number(result).toFixed(2)} €
         </Text>
       )}
       <View style={styles.side}>
