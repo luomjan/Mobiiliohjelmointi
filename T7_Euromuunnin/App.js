@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, TextInput, FlatList, Image, } from 'rea
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Picker } from '@react-native-picker/picker';
+import { API_KEY } from "@env";
 
 
 export default function App() {
@@ -14,7 +15,7 @@ export default function App() {
   const [currencies, setCurrencies] = useState([]);
 
   const myHeaders = new Headers();
-  myHeaders.append("apikey", "JHOhj5tgQ6J47lfGnET5g7crV0dI5Zn3");
+  myHeaders.append("apikey", API_KEY);
 
   const requestOptions = {
     method: 'GET',
