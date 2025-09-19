@@ -1,19 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { EXPO_PUBLIC_API_KEY } from "@env";
+import * as Location from 'expo-location';
 
 export default function App() {
 
   const [text, setText] = useState("");
-  const [coords, setCoords] = useState({
-    latitude: 60.200692,
-    longitude: 24.934302,
-    latitudeDelta: 0.0322,
-    longitudeDelta: 0.0221
-  });
+  const [coords, setCoords] = useState(null);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert('No permission to get location')
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      setCoords({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.0322,
+        longitudeDelta: 0.0221
+      });
+
+    })();
+  }, []);
 
   const buttonPressed = async () => {
     try {
@@ -67,9 +82,10 @@ export default function App() {
         style={{ width: '100%', height: '80%' }}
         region={coords}
       >
-        <Marker
-          coordinate={coords}
-        />
+        {coords && (
+          <Marker coordinate={coords} />
+        )}
+
       </MapView>
 
       <StatusBar style="auto" />
