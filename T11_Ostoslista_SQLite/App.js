@@ -66,14 +66,14 @@ export default function App() {
       <Button onPress={saveItem} title="Save" />
 
       <FlatList
+        ListHeaderComponent={
+          <Text style={styles.header}>Shopping list</Text>
+        }
         keyExtractor={item => item.id.toString()}
         renderItem={({ item }) =>
-          <View style={{
-            flex: 1, flexDirection: 'row',
-            alignItems: 'center'
-          }}>
-            <Text>{item.product}</Text>
-            <Text>{item.amount} </Text>
+          <View style={styles.listcontainer}>
+            <Text style={styles.itemText}>{item.product}</Text>
+            <Text style={styles.itemText}>{item.amount} </Text>
             <Text style={{ color: '#2f00ffff' }} onPress={() => deleteItem(item.id)}>Bought</Text>
           </View>
         }
@@ -91,5 +91,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 80,
+  },
+  header: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginVertical: 15,
+    textAlign: 'center',
+  },
+  listcontainer: {
+    flexDirection: 'row',
+    fontSize: 20,
+    justifyContent: 'space-between',
+    width: 150,
+    marginVertical: 10,
+    paddingHorizontal: 10,
+  },
+  itemText: {
+    fontSize: 16,
   },
 });
