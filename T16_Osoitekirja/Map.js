@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { useState } from 'react';
 
 export default function Map({ route }) {
 
-    const { infoToPass } = route.params;
+    const { coords } = route.params;
     const [region, setRegion] = useState({
         latitude: 60.200692,
         longitude: 24.934302,
@@ -12,19 +12,24 @@ export default function Map({ route }) {
         longitudeDelta: 0.0221,
     })
 
+    const save = () => {
+        Alert.alert("Button pressed");
+    };
+
     return (
         <View style={styles.container}>
-            <Text>Welcome to our App! </Text>
 
             <MapView
                 style={{ width: '100%', height: '80%' }}
                 region={region}
             >
-            <Marker
-                coordinate={region}
-                title='Haaga-Helia'
-            />
-            </MapView>
+                <Marker
+                    coordinate={region}
+                    title='Haaga-Helia'
+                />
+            </MapView><View>
+                <Button onPress={save} title="Save" />
+            </View>
         </View>
     );
 }
