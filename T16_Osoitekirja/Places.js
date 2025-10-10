@@ -1,15 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { useState } from 'react';
 
-export default function Main({navigation}) {
+export default function Places({ navigation }) {
 
-    const [infoToPass, setInfoToPass] = useState("");
+  const [infoToPass, setInfoToPass] = useState("");
 
   return (
     <View style={styles.container}>
       <Text>Welcome to our App!</Text>
       <Button
         title="Map"
-        onPress={() => navigation.navigate('Map', {infoToPass})}
+        onPress={() => navigation.navigate('Map', { infoToPass })}
       />
     </View>
   );
