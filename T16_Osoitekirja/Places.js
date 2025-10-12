@@ -26,12 +26,14 @@ export default function Places({ navigation }) {
         const lat = parseFloat(data[0].lat);
         const lng = parseFloat(data[0].lon); //KESKEN 
 
-        setCoords({ ...coords, latitude: lat, longitude: lng })
+        const newCoords = { ...coords, latitude: lat, longitude: lng };
+        setCoords(newCoords);
 
+        navigation.navigate('Map', { coords: newCoords })
       })
 
     //Lopuksi
-    navigation.navigate('Map', { coords })
+
   }
 
   return (

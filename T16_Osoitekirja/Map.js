@@ -5,12 +5,7 @@ import { useState } from 'react';
 export default function Map({ route }) {
 
     const { coords } = route.params;
-    const [region, setRegion] = useState({
-        latitude: 60.200692,
-        longitude: 24.934302,
-        latitudeDelta: 0.0322,
-        longitudeDelta: 0.0221,
-    })
+    const [region, setRegion] = useState(coords)
 
     const save = () => {
         Alert.alert("Button pressed");
